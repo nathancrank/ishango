@@ -1,0 +1,472 @@
+// Ishango v0.1
+// Test Suite
+// Nathan Crank
+// http://nathancrank.com/ishango
+
+@import "ishango";
+
+
+
+
+// is-int {
+//   @debug "is-int test";
+//   @for $i from -100 through 100 {
+//     is-int-#{$i/10}: is-int($i/10);
+//   }
+// }
+
+// is-float {
+//   @debug "is-float test";
+//   @for $i from 1 through 100 {
+//     is-float-#{$i/10}: is-float($i/10);
+//   }
+// }
+
+// is-inf {
+//   @debug "is-inf test";
+
+//   true: is-inf(1.0/0.0);
+//   false: is-inf(-1.0/0.0);
+//   false: is-inf(.0/.0);
+//   false: is-inf(0/0);
+
+//   false: is-inf(0);
+//   false: is-inf(1);
+//   false: is-inf(word);
+//   false: is-inf(exponent(4,6,8));
+// }
+
+// is-prime {
+//   @debug "is-prime test";
+
+//   @for $i from -10 through 100 {
+//     @debug "is-prime(#{i})";
+//     is-prime-#{$i}: is-prime($i);
+//   }
+// }
+
+
+
+
+// constants {
+//   @debug "constants test";
+//   pi: pi();
+//   π: π();
+//   golden-ratio: golden-ratio();
+//   φ: φ();
+//   e: e();
+// }
+
+
+
+
+// opp {
+//   @debug "opp test";
+//   @for $i from -10 through 10 {
+//     opp-#{$i}: opp($i);
+//   }
+// }
+
+// abs-opp {
+//   @debug "abs-opp test";
+//   @for $i from 1 through 10 {
+//     abs-opp-#{$i}: abs-opp($i);
+//   }
+// }
+
+// percent {
+//   @debug "percent test";
+//   @for $i from 1 through 100 {
+//     percent-#{$i}: percent($i);
+//   }
+// }
+
+// float-truncate {
+//   @debug "float-truncate test";
+//   /* 1-100 / 1000 2 places */
+//   @for $i from 1 through 100 {
+//     float-truncate-#{$i/1000}: float-truncate($i/1000);
+//   }
+
+//   /* 1-100 / 1000 3 places */
+//   @for $i from 1 through 100 {
+//     float-truncate-#{$i/1000}: float-truncate($i/1000,3);
+//   }
+
+//   /* 1-100 / 1000 4 places */
+//   @for $i from 1 through 100 {
+//     float-truncate-#{$i/1000}: float-truncate($i/1000,4);
+//   }
+
+//   /* 1-100 / 1000 5 places */
+//   @for $i from 1 through 100 {
+//     float-truncate-#{$i/1000}: float-truncate($i/1000,5);
+//   }
+
+//   /* pi */
+//   float-truncate-pi: float-truncate(pi(),1);
+//   float-truncate-pi: float-truncate(pi(),2);
+//   float-truncate-pi: float-truncate(pi(),3);
+//   float-truncate-pi: float-truncate(pi(),4);
+//   float-truncate-pi: float-truncate(pi(),5);
+
+//   /* golden-ratio */
+//   float-truncate-golden-ratio: float-truncate(golden-ratio(),1);
+//   float-truncate-golden-ratio: float-truncate(golden-ratio(),2);
+//   float-truncate-golden-ratio: float-truncate(golden-ratio(),3);
+//   float-truncate-golden-ratio: float-truncate(golden-ratio(),4);
+//   float-truncate-golden-ratio: float-truncate(golden-ratio(),5);
+
+//   /* e */
+//   float-truncate-e: float-truncate(e(),1);
+//   float-truncate-e: float-truncate(e(),2);
+//   float-truncate-e: float-truncate(e(),3);
+//   float-truncate-e: float-truncate(e(),4);
+//   float-truncate-e: float-truncate(e(),5);
+// }
+
+// remove-unit {
+//   @debug "remove-unit test";
+//   percent: remove-unit(420%);
+//   em: remove-unit(420em);
+//   rem: remove-unit(420rem);
+//   px: remove-unit(420px);
+//   in: remove-unit(420in);
+//   cm: remove-unit(420cm);
+//   mm: remove-unit(420mm);
+//   ex: remove-unit(420ex);
+//   pt: remove-unit(420pt);
+//   pc: remove-unit(420pc);
+// }
+
+// bool-flip {
+//   @debug "bool-flip test";
+//   true: bool-flip(false);
+//   false: bool-flip(true);
+// }
+
+
+
+
+// aprox-equal {
+//   @debug "aprox-equal test";
+//   /* true */
+//   @for $i from 1 through 9 {
+//     aprox-equal: aprox-equal($i/10000,$i/10000 + .00001)
+//   }
+//   /* false */
+//   @for $i from 1 through 9 {
+//     aprox-equal: aprox-equal($i/10000,$i/10000 + .00003)
+//   }
+// }
+
+// not-aprox-equal {
+//   @debug "not-aprox-equal test";
+//   /* false */
+//   @for $i from 1 through 9 {
+//     not-aprox-equal: not-aprox-equal($i/10000,$i/10000 + .00001)
+//   }
+//   /* true */
+//   @for $i from 1 through 9 {
+//     not-aprox-equal: not-aprox-equal($i/10000,$i/10000 + .00003)
+//   }
+// }
+
+
+
+
+// nth-root {
+//   @debug "nth-root test";
+//   @for $a from -18 through 18 {
+//     @for $b from -18 through 18 {
+//       @debug "nth-root(#{$a/2},#{$b/2})";
+//       nth-root-#{$a/2}-#{$b/2}: nth-root($a/2,$b/2);
+//     }
+//   }
+// }
+
+// sqrt {
+//   @debug "square root test";
+//   @for $i from -9 through 9 {
+//     sqrt-#{$i}: sqrt($i);
+//   }
+// }
+
+// cubert {
+//   @debug "cube root test";
+//   @for $i from -9 through 9 {
+//     cubert-#{$i}: cubert($i);
+//   }
+// }
+
+
+
+
+// exponent {
+//   @debug "exponent test";
+//   @for $a from -18 through 18 {
+//     @for $b from -18 through 18 {
+//       @for $c from -18 through 18 {
+//         @debug "exponent(#{$a/2},#{$b/2},#{$c/2})";
+//         exponent-#{$a/2}-#{$b/2}-#{$c/2}: exponent($a/2,$b/2,$c/2);
+//       }
+//     }
+//   }
+// }
+
+// square {
+//   @debug "square test";
+//   @for $i from -9 through 9 {
+//     square-#{$i}: square($i);
+//   }
+// }
+
+// cube {
+//   @debug "cube test";
+//   @for $i from -9 through 9 {
+//     cube-#{$i}: cube($i);
+//   }
+// }
+
+// power {
+//   @debug "power test";
+//   @for $a from -9 through 9 {
+//     @for $b from -99 through 99 {
+//       @debug power($a,$b/10);
+//       power-#{$a}-#{$b/10}: power($a,$b/10);
+//     }
+//   }
+// }
+
+// pow {
+//   @debug "pow test";
+//   @for $a from -9 through 9 {
+//     @for $b from -99 through 99 {
+//       pow-#{$a}-#{$b/10}: pow($a,$b/10);
+//     }
+//   }
+// }
+
+
+
+
+// factorial {
+//   @debug "factorial test";
+//   @for $i from 1 through 1024 {
+//     factorial-#{$i/4}: factorial($i/4);
+//   }
+// }
+
+
+
+
+// log {
+//   @debug "log test";
+//   @for $i from -99 through 99 {
+//     @debug "log(#{$i/2})";
+//     log-#{$i/2}: log($i/2);
+//   }
+// }
+
+// ln {
+//   @debug "ln test";
+//   @for $i from -99 through 99 {
+//     @debug "ln(#{$i/2})";
+//     ln-#{$i/2}: ln($i/2);
+//   }
+// }
+
+
+
+
+// deg-to-rad {
+//   @debug "deg-to-rad test";
+//   @for $i from 1 through 360 {
+//     deg-to-rad-#{$i}: deg-to-rad($i);
+//   }
+// }
+
+// rad-to-deg {
+//   @debug "rad-to-deg test";
+//   @for $i from 1 through 360 {
+//     rad-to-deg-#{$i}: rad-to-deg($i);
+//   }
+// }
+
+
+
+
+exp {
+  @debug "exponential function test";
+  @for $i from -12 through 256 {
+    @debug "exp(#{$i/2})";
+    exp-#{$i/2}: exp($i/2);
+  }
+}
+
+
+
+
+// sin {
+//   @debug "sin deg test";
+//   @for $i from -720 through 720 {
+//     @debug "sin(#{$i/2},deg)";
+//     sin-#{$i/2}: sin($i/2); 
+//   }
+//   @debug "sin rad test";
+//   @for $i from -20 through 20 {
+//     @debug "sin(#{$i/10},rad)";
+//     sin-#{$i/10}: sin($i/10,rad); 
+//   }
+// }
+
+// cos {
+//   @debug "cos deg test";
+//   @for $i from -720 through 720 {
+//     @debug "cos(#{$i/2},deg)";
+//     cos-#{$i/2}: cos($i/2);
+//   }
+//   @debug "cos rad test";
+//   @for $i from -20 through 20 {
+//     @debug "cos(#{$i/10},rad)";
+//     cos-#{$i/10}: cos($i/10,rad); 
+//   }
+// }
+
+// tan {
+//   @debug "tan deg test";
+//   @for $i from -720 through 720 {
+//     @debug "tan(#{$i/2},deg)";
+//     tan-#{$i/2}: tan($i/2);
+//   }
+//   @debug "tan rad test";
+//   @for $i from -20 through 20 {
+//     @debug "tan(#{$i/10},rad)";
+//     tan-#{$i/10}: tan($i/10,rad); 
+//   }
+// }
+
+// csc {
+//   @debug "csc deg test";
+//   @for $i from -720 through 720 {
+//     @debug "csc(#{$i/2},deg)";
+//     csc-#{$i/2}: csc($i/2);
+//   }
+//   @debug "csc rad test";
+//   @for $i from -20 through 20 {
+//     @debug "csc(#{$i/10},rad)";
+//     csc-#{$i/10}: csc($i/10,rad); 
+//   }
+// }
+
+// sec {
+//   @debug "sec deg test";
+//   @for $i from -720 through 720 {
+//     @debug "sec(#{$i/2},deg)";
+//     sec-#{$i/2}: sec($i/2);
+//   }
+//   @debug "sec rad test";
+//   @for $i from -20 through 20 {
+//     @debug "sec(#{$i/10},rad)";
+//     sec-#{$i/10}: sec($i/10,rad); 
+//   }
+// }
+
+// cot {
+//   @debug "cot deg test";
+//   @for $i from -720 through 720 {
+//     @debug "cot(#{$i/2},deg)";
+//     cot-#{$i/2}: cot($i/2);
+//   }
+//   @debug "cot rad test";
+//   @for $i from -20 through 20 {
+//     @debug "cot(#{$i/10},rad)";
+//     cot-#{$i/10}: cot($i/10,rad); 
+//   }
+// }
+
+// sinh {
+//   @debug "sinh test";
+//   @for $i from -20 through 20 {
+//     @debug "sinh(#{$i/10})";
+//     sinh-#{$i/10}: sinh($i/10);
+//   }
+// }
+
+// cosh {
+//   @debug "cosh test";
+//   @for $i from -20 through 20 {
+//     @debug "cosh(#{$i/10})";
+//     cosh-#{$i/10}: cosh($i/10);
+//   }
+// }
+
+// tanh {
+//   @debug "tanh test";
+//   @for $i from -20 through 20 {
+//     @debug "tanh(#{$i/10})";
+//     tanh-#{$i/10}: tanh($i/10);
+//   }
+// }
+
+// csch {
+//   @debug "csch test";
+//   @for $i from -20 through 20 {
+//     @debug "csch(#{$i/10})";
+//     csch-#{$i/10}: csch($i/10);
+//   }
+// }
+
+// scsh {
+//   @debug "scsh test";
+//   @for $i from -20 through 20 {
+//     @debug "scsh(#{$i/10})";
+//     scsh-#{$i/10}: scsh($i/10);
+//   }
+// }
+
+// coth {
+//   @debug "coth test";
+//   @for $i from -20 through 20 {
+//     @debug "coth(#{$i/10})";
+//     coth-#{$i/10}: coth($i/10);
+//   }
+// }
+
+// hypotenuse {
+//   @debug "hypotenuse test";
+//   @for $a from 1 through 9 {
+//     @for $b from 1 through 9 {
+//     @debug "hypotenuse(#{$a},#{$b})";
+//       hypotenuse-#{$a}-#{$b}: hypotenuse($a,$b);
+//     }
+//   }
+// }
+
+
+
+
+// fibinocci {
+//   @debug "fibinocci test";
+//   @for $i from 1 through 99 {
+//     @debug "fibinocci(#{$i})";
+//     fibinocci-#{$i}: fibinocci($i);
+//   }
+
+//   fail: fibinocci(a);
+//   fail: fibinocci(3em);
+//   fail: fibinocci(5, a);
+//   fail: fibinocci(5, a a);
+//   fail: fibinocci(5, a a a);
+// }
+
+// nth-fibinocci {
+//   @debug "nth-fibinocci test";
+//   @for $i from 1 through 99 {
+//     @debug "nth-fibinocci(#{$i})";
+//     nth-fibinocci-#{$i}: nth-fibinocci($i);
+//   }
+
+//   fail: nth-fibinocci(a);
+//   fail: nth-fibinocci(3em);
+// }
