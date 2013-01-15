@@ -1,8 +1,7 @@
 // Ishango v0.1
-// Math for SASS
-// Tons of math functions for your SASS projects.
+// Math functions for your SASS projects.
 // Nathan Crank
-// http://nathancrank.com/ishango
+// http://nathancrank.com/
 
 
 
@@ -11,18 +10,26 @@
 // TODO
 //////////////////////////////////////////////////
 
+// - add float-round() function
+// - add float-ceil() function
+// - remove unitless requirements from functions using remove-unit()
+
+
+// - develop function to modify nth-position list items
+//      (effectively allowing list to act fully as arrays)
+
+// - convert base ten to binary function
+// - add bit-shift functions
+
 // - develop power() function
 // - develop exp()
 // - Verify sinh-coth
 // - develop random() function - heh...
 
-// - remove unitless requirements from functions using remove-unit()
 
 
 // Maybes
 /////////
-// - develop function to modify nth-position list items
-//      (effectively allowing list to act fully as arrays)
 
 // - way to catch NaN in addition to Infinity
 
@@ -99,7 +106,7 @@
 }
 
 @function golden-ratio() {
-  @return 1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374 ;
+  @return 1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374;
 }
 @function φ() {
   @return golden-ratio();
@@ -127,7 +134,7 @@
   @return Infinity();
 }
 
-@function life-the-university-and-everything() {
+@function life-the-universe-and-everything() {
   @return 42;
 }
 
@@ -165,19 +172,18 @@
   @return $value / 100;
 }
 
-// Truncate floating point values
-// This is not rounding.
-@function float-truncate($value: pi(), $prec: 2) {
+// floor floating point values
+@function float-floor($value: pi(), $prec: 2) {
   @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "float-truncate only accepts unitless numbers.";
+    @debug "float-floor only accepts unitless numbers.";
     @return null;
   }
   @if ( type-of($prec) == number and unitless($prec) ) == false {
-    @debug "float-truncate $prec must be set with a unitless number values. Returning false.";
+    @debug "float-floor $prec must be set with a unitless number values. Returning false.";
     @return false;
   }
   @if is-int($value) {
-    @debug "float-truncate is pointless when called on an integer.";
+    @debug "float-floor is pointless when called on an integer.";
     @return $value;
   }
 
@@ -236,6 +242,10 @@
 }
 
 @function bool-flip($value) {
+  @if $value != boolean {
+    @debug "bool-flip() only accepts boolean values. Returning value unchanged.";
+    @return $value;
+  }
   @if $value { @return false; }
   @else { @return true; }
 }
@@ -250,9 +260,9 @@
 
 
 //////////////////////////////////////////////////
-// aproximate equality
+// approximate equality
 //////////////////////////////////////////////////
-// aproximate equalality makes up for SASS rounding errors
+// approximate equality makes up for SASS rounding errors
 
 @function aprox-equal($value1, $value2, $prec: .00002) {
   @if ( type-of($value1) == number and unitless($value1) ) == false {
@@ -821,7 +831,7 @@
 
 
 //////////////////////////////////////////////////
-// Fibinocci's sequence
+// fibinocci sequence
 //////////////////////////////////////////////////
 
 // $max is the number of values to return

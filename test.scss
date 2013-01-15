@@ -81,48 +81,48 @@
 //   }
 // }
 
-// float-truncate {
-//   @debug "float-truncate test";
+// float-floor {
+//   @debug "float-floor test";
 //   /* 1-100 / 1000 2 places */
 //   @for $i from 1 through 100 {
-//     float-truncate-#{$i/1000}: float-truncate($i/1000);
+//     float-floor-#{$i/1000}: float-floor($i/1000);
 //   }
 
 //   /* 1-100 / 1000 3 places */
 //   @for $i from 1 through 100 {
-//     float-truncate-#{$i/1000}: float-truncate($i/1000,3);
+//     float-floor-#{$i/1000}: float-floor($i/1000,3);
 //   }
 
 //   /* 1-100 / 1000 4 places */
 //   @for $i from 1 through 100 {
-//     float-truncate-#{$i/1000}: float-truncate($i/1000,4);
+//     float-floor-#{$i/1000}: float-floor($i/1000,4);
 //   }
 
 //   /* 1-100 / 1000 5 places */
 //   @for $i from 1 through 100 {
-//     float-truncate-#{$i/1000}: float-truncate($i/1000,5);
+//     float-floor-#{$i/1000}: float-floor($i/1000,5);
 //   }
 
 //   /* pi */
-//   float-truncate-pi: float-truncate(pi(),1);
-//   float-truncate-pi: float-truncate(pi(),2);
-//   float-truncate-pi: float-truncate(pi(),3);
-//   float-truncate-pi: float-truncate(pi(),4);
-//   float-truncate-pi: float-truncate(pi(),5);
+//   float-floor-pi: float-floor(pi(),1);
+//   float-floor-pi: float-floor(pi(),2);
+//   float-floor-pi: float-floor(pi(),3);
+//   float-floor-pi: float-floor(pi(),4);
+//   float-floor-pi: float-floor(pi(),5);
 
 //   /* golden-ratio */
-//   float-truncate-golden-ratio: float-truncate(golden-ratio(),1);
-//   float-truncate-golden-ratio: float-truncate(golden-ratio(),2);
-//   float-truncate-golden-ratio: float-truncate(golden-ratio(),3);
-//   float-truncate-golden-ratio: float-truncate(golden-ratio(),4);
-//   float-truncate-golden-ratio: float-truncate(golden-ratio(),5);
+//   float-floor-golden-ratio: float-floor(golden-ratio(),1);
+//   float-floor-golden-ratio: float-floor(golden-ratio(),2);
+//   float-floor-golden-ratio: float-floor(golden-ratio(),3);
+//   float-floor-golden-ratio: float-floor(golden-ratio(),4);
+//   float-floor-golden-ratio: float-floor(golden-ratio(),5);
 
 //   /* e */
-//   float-truncate-e: float-truncate(e(),1);
-//   float-truncate-e: float-truncate(e(),2);
-//   float-truncate-e: float-truncate(e(),3);
-//   float-truncate-e: float-truncate(e(),4);
-//   float-truncate-e: float-truncate(e(),5);
+//   float-floor-e: float-floor(e(),1);
+//   float-floor-e: float-floor(e(),2);
+//   float-floor-e: float-floor(e(),3);
+//   float-floor-e: float-floor(e(),4);
+//   float-floor-e: float-floor(e(),5);
 // }
 
 // remove-unit {
@@ -143,6 +143,7 @@
 //   @debug "bool-flip test";
 //   true: bool-flip(false);
 //   false: bool-flip(true);
+//   unchanged: bool-flip(420);
 // }
 
 
