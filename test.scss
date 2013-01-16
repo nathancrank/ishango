@@ -40,7 +40,9 @@
 //   @debug "is-prime test";
 
 //   @for $i from -10 through 100 {
-//     @debug "is-prime(#{i})";
+//     is-prime-#{$i}: is-prime($i);
+//   }
+//   @for $i from -10em through 100em {
 //     is-prime-#{$i}: is-prime($i);
 //   }
 // }
@@ -62,46 +64,91 @@
 
 // opp {
 //   @debug "opp test";
-//   @for $i from -10 through 10 {
+//   @for $i from -10em through 10em {
 //     opp-#{$i}: opp($i);
 //   }
 // }
 
 // abs-opp {
 //   @debug "abs-opp test";
-//   @for $i from 1 through 10 {
+//   @for $i from -10em through 10em {
 //     abs-opp-#{$i}: abs-opp($i);
 //   }
 // }
 
 // percent {
 //   @debug "percent test";
-//   @for $i from 1 through 100 {
+//   @for $i from 1em through 100em {
 //     percent-#{$i}: percent($i);
 //   }
 // }
 
+// float-round {
+//   @debug "float-round test";
+
+//   /* pi */
+//   float-round-pi: float-round(pi(),1);
+//   float-round-pi: float-round(pi(),2);
+//   float-round-pi: float-round(pi(),3);
+//   float-round-pi: float-round(pi(),4);
+//   float-round-pi: float-round(pi(),5);
+
+//   /* golden-ratio */
+//   float-round-golden-ratio: float-round(golden-ratio(),1);
+//   float-round-golden-ratio: float-round(golden-ratio(),2);
+//   float-round-golden-ratio: float-round(golden-ratio(),3);
+//   float-round-golden-ratio: float-round(golden-ratio(),4);
+//   float-round-golden-ratio: float-round(golden-ratio(),5);
+
+//   /* e */
+//   float-round-e: float-round(e(),1);
+//   float-round-e: float-round(e(),2);
+//   float-round-e: float-round(e(),3);
+//   float-round-e: float-round(e(),4);
+//   float-round-e: float-round(e(),5);
+
+//   /* with units */
+//   float-round-e: float-round(3.141592em,1);
+//   float-round-e: float-round(3.141592em,2);
+//   float-round-e: float-round(3.141592em,3);
+//   float-round-e: float-round(3.141592em,4);
+//   float-round-e: float-round(3.141592em,5);
+// }
+
+// float-ceil {
+//   @debug "float-ceil test";
+
+//   /* pi */
+//   float-ceil-pi: float-ceil(pi(),1);
+//   float-ceil-pi: float-ceil(pi(),2);
+//   float-ceil-pi: float-ceil(pi(),3);
+//   float-ceil-pi: float-ceil(pi(),4);
+//   float-ceil-pi: float-ceil(pi(),5);
+
+//   /* golden-ratio */
+//   float-ceil-golden-ratio: float-ceil(golden-ratio(),1);
+//   float-ceil-golden-ratio: float-ceil(golden-ratio(),2);
+//   float-ceil-golden-ratio: float-ceil(golden-ratio(),3);
+//   float-ceil-golden-ratio: float-ceil(golden-ratio(),4);
+//   float-ceil-golden-ratio: float-ceil(golden-ratio(),5);
+
+//   /* e */
+//   float-ceil-e: float-ceil(e(),1);
+//   float-ceil-e: float-ceil(e(),2);
+//   float-ceil-e: float-ceil(e(),3);
+//   float-ceil-e: float-ceil(e(),4);
+//   float-ceil-e: float-ceil(e(),5);
+
+//     /* with units */
+//   float-ceil-e: float-ceil(3.141592em,1);
+//   float-ceil-e: float-ceil(3.141592em,2);
+//   float-ceil-e: float-ceil(3.141592em,3);
+//   float-ceil-e: float-ceil(3.141592em,4);
+//   float-ceil-e: float-ceil(3.141592em,5);
+// }
+
 // float-floor {
 //   @debug "float-floor test";
-//   /* 1-100 / 1000 2 places */
-//   @for $i from 1 through 100 {
-//     float-floor-#{$i/1000}: float-floor($i/1000);
-//   }
-
-//   /* 1-100 / 1000 3 places */
-//   @for $i from 1 through 100 {
-//     float-floor-#{$i/1000}: float-floor($i/1000,3);
-//   }
-
-//   /* 1-100 / 1000 4 places */
-//   @for $i from 1 through 100 {
-//     float-floor-#{$i/1000}: float-floor($i/1000,4);
-//   }
-
-//   /* 1-100 / 1000 5 places */
-//   @for $i from 1 through 100 {
-//     float-floor-#{$i/1000}: float-floor($i/1000,5);
-//   }
 
 //   /* pi */
 //   float-floor-pi: float-floor(pi(),1);
@@ -123,6 +170,13 @@
 //   float-floor-e: float-floor(e(),3);
 //   float-floor-e: float-floor(e(),4);
 //   float-floor-e: float-floor(e(),5);
+
+//     /* with units */
+//   float-floor-e: float-floor(3.141592em,1);
+//   float-floor-e: float-floor(3.141592em,2);
+//   float-floor-e: float-floor(3.141592em,3);
+//   float-floor-e: float-floor(3.141592em,4);
+//   float-floor-e: float-floor(3.141592em,5);
 // }
 
 // remove-unit {
@@ -155,10 +209,12 @@
 //   @for $i from 1 through 9 {
 //     aprox-equal: aprox-equal($i/10000,$i/10000 + .00001)
 //   }
+//   aprox-equal: aprox-equal(3.141592em,3.141593em);
 //   /* false */
 //   @for $i from 1 through 9 {
 //     aprox-equal: aprox-equal($i/10000,$i/10000 + .00003)
 //   }
+//   aprox-equal: aprox-equal(3.141592em,3.141892em);
 // }
 
 // not-aprox-equal {
@@ -167,10 +223,12 @@
 //   @for $i from 1 through 9 {
 //     not-aprox-equal: not-aprox-equal($i/10000,$i/10000 + .00001)
 //   }
+//   not-aprox-equal: not-aprox-equal(3.141592em,3.141593em);
 //   /* true */
 //   @for $i from 1 through 9 {
 //     not-aprox-equal: not-aprox-equal($i/10000,$i/10000 + .00003)
 //   }
+//   not-aprox-equal: not-aprox-equal(3.141592em,3.141892em);
 // }
 
 
@@ -184,11 +242,20 @@
 //       nth-root-#{$a/2}-#{$b/2}: nth-root($a/2,$b/2);
 //     }
 //   }
+//   @for $a from -18em through 18em {
+//     @for $b from -18 through 18 {
+//       @debug "nth-root(#{$a/2},#{$b/2})";
+//       nth-root-#{$a/2}-#{$b/2}: nth-root($a/2,$b/2);
+//     }
+//   }
 // }
 
 // sqrt {
 //   @debug "square root test";
 //   @for $i from -9 through 9 {
+//     sqrt-#{$i}: sqrt($i);
+//   }
+//   @for $i from -9em through 9em {
 //     sqrt-#{$i}: sqrt($i);
 //   }
 // }
@@ -197,6 +264,9 @@
 //   @debug "cube root test";
 //   @for $i from -9 through 9 {
 //     cubert-#{$i}: cubert($i);
+//   }
+//   @for $i from -9em through 9em {
+//     sqrt-#{$i}: sqrt($i);
 //   }
 // }
 
@@ -213,6 +283,14 @@
 //       }
 //     }
 //   }
+//   @for $a from -18em through 18em {
+//     @for $b from -18 through 18 {
+//       @for $c from -18 through 18 {
+//         @debug "exponent(#{$a/2},#{$b/2},#{$c/2})";
+//         exponent-#{$a/2}-#{$b/2}-#{$c/2}: exponent($a/2,$b/2,$c/2);
+//       }
+//     }
+//   }
 // }
 
 // square {
@@ -220,11 +298,17 @@
 //   @for $i from -9 through 9 {
 //     square-#{$i}: square($i);
 //   }
+//   @for $i from -9em through 9em {
+//     square-#{$i}: square($i);
+//   }
 // }
 
 // cube {
 //   @debug "cube test";
 //   @for $i from -9 through 9 {
+//     cube-#{$i}: cube($i);
+//   }
+//   @for $i from -9em through 9em {
 //     cube-#{$i}: cube($i);
 //   }
 // }
@@ -256,6 +340,9 @@
 //   @for $i from 1 through 1024 {
 //     factorial-#{$i/4}: factorial($i/4);
 //   }
+//   @for $i from 1em through 128em {
+//     factorial-#{$i}: factorial($i);
+//   }
 // }
 
 
@@ -267,11 +354,19 @@
 //     @debug "log(#{$i/2})";
 //     log-#{$i/2}: log($i/2);
 //   }
+//   @for $i from -9em through 9em {
+//     @debug "log(#{$i/2})";
+//     log-#{$i/2}: log($i/2);
+//   }
 // }
 
 // ln {
 //   @debug "ln test";
 //   @for $i from -99 through 99 {
+//     @debug "ln(#{$i/2})";
+//     ln-#{$i/2}: ln($i/2);
+//   }
+//   @for $i from -9em through 9em {
 //     @debug "ln(#{$i/2})";
 //     ln-#{$i/2}: ln($i/2);
 //   }
@@ -297,94 +392,142 @@
 
 
 
-exp {
-  @debug "exponential function test";
-  @for $i from -12 through 256 {
-    @debug "exp(#{$i/2})";
-    exp-#{$i/2}: exp($i/2);
+// exp {
+//   @debug "exponential function test";
+//   @for $i from -12 through 256 {
+//     @debug "exp(#{$i/2})";
+//     exp-#{$i/2}: exp($i/2);
+//   }
+// }
+
+
+
+
+sin {
+  @debug "sin deg test";
+  @for $i from -720 through 720 {
+    @debug "sin(#{$i/2},deg)";
+    sin-#{$i/2}: sin($i/2); 
+  }
+  @for $i from -360em through 360em {
+    @debug "sin(#{$i/2},deg)";
+    sin-#{$i/2}: sin($i/2); 
+  }
+  @debug "sin rad test";
+  @for $i from -20 through 20 {
+    @debug "sin(#{$i/10},rad)";
+    sin-#{$i/10}: sin($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "sin(#{$i/10},rad)";
+    sin-#{$i/10}: sin($i/10,rad); 
   }
 }
 
+cos {
+  @debug "cos deg test";
+  @for $i from -720 through 720 {
+    @debug "cos(#{$i/2},deg)";
+    cos-#{$i/2}: cos($i/2);
+  }
+  @for $i from -360em through 360em {
+    @debug "cos(#{$i/2},deg)";
+    cos-#{$i/2}: cos($i/2);
+  }
+  @debug "cos rad test";
+  @for $i from -20 through 20 {
+    @debug "cos(#{$i/10},rad)";
+    cos-#{$i/10}: cos($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "cos(#{$i/10},rad)";
+    cos-#{$i/10}: cos($i/10,rad); 
+  }
+}
 
+tan {
+  @debug "tan deg test";
+  @for $i from -720 through 720 {
+    @debug "tan(#{$i/2},deg)";
+    tan-#{$i/2}: tan($i/2);
+  }
+  @for $i from -360em through 360em {
+    @debug "tan(#{$i/2},deg)";
+    tan-#{$i/2}: tan($i/2);
+  }
+  @debug "tan rad test";
+  @for $i from -20 through 20 {
+    @debug "tan(#{$i/10},rad)";
+    tan-#{$i/10}: tan($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "tan(#{$i/10},rad)";
+    tan-#{$i/10}: tan($i/10,rad); 
+  }
+}
 
+csc {
+  @debug "csc deg test";
+  @for $i from -720 through 720 {
+    @debug "csc(#{$i/2},deg)";
+    csc-#{$i/2}: csc($i/2);
+  }
+  @for $i from -360em through 360em {
+    @debug "csc(#{$i/2},deg)";
+    csc-#{$i/2}: csc($i/2);
+  }
+  @debug "csc rad test";
+  @for $i from -20 through 20 {
+    @debug "csc(#{$i/10},rad)";
+    csc-#{$i/10}: csc($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "csc(#{$i/10},rad)";
+    csc-#{$i/10}: csc($i/10,rad); 
+  }
+}
 
-// sin {
-//   @debug "sin deg test";
-//   @for $i from -720 through 720 {
-//     @debug "sin(#{$i/2},deg)";
-//     sin-#{$i/2}: sin($i/2); 
-//   }
-//   @debug "sin rad test";
-//   @for $i from -20 through 20 {
-//     @debug "sin(#{$i/10},rad)";
-//     sin-#{$i/10}: sin($i/10,rad); 
-//   }
-// }
+sec {
+  @debug "sec deg test";
+  @for $i from -720 through 720 {
+    @debug "sec(#{$i/2},deg)";
+    sec-#{$i/2}: sec($i/2);
+  }
+  @for $i from -360em through 360em {
+    @debug "sec(#{$i/2},deg)";
+    sec-#{$i/2}: sec($i/2);
+  }
+  @debug "sec rad test";
+  @for $i from -20 through 20 {
+    @debug "sec(#{$i/10},rad)";
+    sec-#{$i/10}: sec($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "sec(#{$i/10},rad)";
+    sec-#{$i/10}: sec($i/10,rad); 
+  }
+}
 
-// cos {
-//   @debug "cos deg test";
-//   @for $i from -720 through 720 {
-//     @debug "cos(#{$i/2},deg)";
-//     cos-#{$i/2}: cos($i/2);
-//   }
-//   @debug "cos rad test";
-//   @for $i from -20 through 20 {
-//     @debug "cos(#{$i/10},rad)";
-//     cos-#{$i/10}: cos($i/10,rad); 
-//   }
-// }
-
-// tan {
-//   @debug "tan deg test";
-//   @for $i from -720 through 720 {
-//     @debug "tan(#{$i/2},deg)";
-//     tan-#{$i/2}: tan($i/2);
-//   }
-//   @debug "tan rad test";
-//   @for $i from -20 through 20 {
-//     @debug "tan(#{$i/10},rad)";
-//     tan-#{$i/10}: tan($i/10,rad); 
-//   }
-// }
-
-// csc {
-//   @debug "csc deg test";
-//   @for $i from -720 through 720 {
-//     @debug "csc(#{$i/2},deg)";
-//     csc-#{$i/2}: csc($i/2);
-//   }
-//   @debug "csc rad test";
-//   @for $i from -20 through 20 {
-//     @debug "csc(#{$i/10},rad)";
-//     csc-#{$i/10}: csc($i/10,rad); 
-//   }
-// }
-
-// sec {
-//   @debug "sec deg test";
-//   @for $i from -720 through 720 {
-//     @debug "sec(#{$i/2},deg)";
-//     sec-#{$i/2}: sec($i/2);
-//   }
-//   @debug "sec rad test";
-//   @for $i from -20 through 20 {
-//     @debug "sec(#{$i/10},rad)";
-//     sec-#{$i/10}: sec($i/10,rad); 
-//   }
-// }
-
-// cot {
-//   @debug "cot deg test";
-//   @for $i from -720 through 720 {
-//     @debug "cot(#{$i/2},deg)";
-//     cot-#{$i/2}: cot($i/2);
-//   }
-//   @debug "cot rad test";
-//   @for $i from -20 through 20 {
-//     @debug "cot(#{$i/10},rad)";
-//     cot-#{$i/10}: cot($i/10,rad); 
-//   }
-// }
+cot {
+  @debug "cot deg test";
+  @for $i from -720 through 720 {
+    @debug "cot(#{$i/2},deg)";
+    cot-#{$i/2}: cot($i/2);
+  }
+  @for $i from -360em through 360em {
+    @debug "cot(#{$i/2},deg)";
+    cot-#{$i/2}: cot($i/2);
+  }
+  @debug "cot rad test";
+  @for $i from -20 through 20 {
+    @debug "cot(#{$i/10},rad)";
+    cot-#{$i/10}: cot($i/10,rad); 
+  }
+  @for $i from -10em through 10em {
+    @debug "cot(#{$i/10},rad)";
+    cot-#{$i/10}: cot($i/10,rad); 
+  }
+}
 
 // sinh {
 //   @debug "sinh test";
@@ -442,6 +585,12 @@ exp {
 //       hypotenuse-#{$a}-#{$b}: hypotenuse($a,$b);
 //     }
 //   }
+//   @for $a from 1em through 9em {
+//     @for $b from 1em through 9em {
+//     @debug "hypotenuse(#{$a},#{$b})";
+//       hypotenuse-#{$a}-#{$b}: hypotenuse($a,$b);
+//     }
+//   }
 // }
 
 
@@ -453,6 +602,8 @@ exp {
 //     @debug "fibinocci(#{$i})";
 //     fibinocci-#{$i}: fibinocci($i);
 //   }
+
+//   pass: fibinocci(100, 0 1em 1em);
 
 //   fail: fibinocci(a);
 //   fail: fibinocci(3em);
@@ -467,6 +618,8 @@ exp {
 //     @debug "nth-fibinocci(#{$i})";
 //     nth-fibinocci-#{$i}: nth-fibinocci($i);
 //   }
+
+//   pass: nth-fibinocci(10, 0 1em 1em);
 
 //   fail: nth-fibinocci(a);
 //   fail: nth-fibinocci(3em);

@@ -10,9 +10,6 @@
 // TODO
 //////////////////////////////////////////////////
 
-// - add float-round() function
-// - add float-ceil() function
-// - remove unitless requirements from functions using remove-unit()
 // - a method to treat list more like arrays
 
 
@@ -52,6 +49,7 @@
 // check if value is a prime number
 // uses Wilson's theorem
 @function is-prime($value) {
+  $value: remove-unit($value);
   @if is-int($value) and $value >= 2 {
     @if factorial($value - 1) % $value == $value - 1 {
       @return true;
@@ -123,7 +121,7 @@
 
 // opposite
 @function opp($value) {
-  @if ( type-of($value) == number) == false {
+  @if type-of($value) != number {
     @debug "opp only accepts numbers.";
     @return null;
   } 
@@ -133,44 +131,42 @@
 // absolute opposite
 // returns -|x|
 @function abs-opp($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "abs-opp only accepts unitless numbers.";
+  @if type-of($value) != number {
+    @debug "abs-opp only accepts numbers.";
     @return null;
   } 
   @return -1 * abs($value);
 }
 
 @function percent($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "percent only accepts unitless numbers.";
+  @if type-of($value) != number {
+    @debug "percent only accepts numbers.";
     @return null;
   }
   @return $value / 100;
 }
 
-// floor floating point values
-@function float-floor($value: pi(), $prec: 2) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "float-floor only accepts unitless numbers.";
+@function float-round($value: pi(), $prec: 2) {
+  @if type-of($value) != number {
+    @debug "float-round only accepts numbers.";
     @return null;
   }
   @if ( type-of($prec) == number and unitless($prec) ) == false {
-    @debug "float-floor $prec must be set with a unitless number values. Returning false.";
+    @debug "float-round $prec must be set with a unitless number values. Returning false.";
     @return false;
   }
   @if is-int($value) {
-    @debug "float-floor is pointless when called on an integer.";
+    @debug "float-round is pointless when called on an integer.";
     @return $value;
   }
 
-  @if $prec < 0 { $prec: abs($prec); }
-  $prec: floor($prec);
+  $prec: floor(abs($prec));
   $int: floor($value);
   $dec: $value - $int;
   
   $working: $dec;
-  $fps: 0;  $sub: .1;  $spot: 1;
-  @while $spot <= $prec {
+  $fps: 0;  $sub: .1;
+  @for $spot from 1 through $prec + 1 {
     $count: 0;
     @while $working > 0 {
       $working: $working - $sub;
@@ -188,11 +184,132 @@
     @else { $fps: append($fps, $count); }
 
     $sub: $sub / 10;
-    $spot: $spot + 1;
   }
+
   $ans: 0;
-  @for $i from 1 through $prec {
-    $ans: $ans + nth($fps, $i);
+  $places: 10;
+  @for $i from 1 through $prec + 1 {
+    $nth: nth($fps, $i);
+    $test: $nth * $places;
+    @if $i == $prec + 1 {
+      @if $test >= 5 {
+        $nth: 10 / $places;
+      } @else {
+        $nth: 0;
+      }
+    }
+    $ans: $ans + $nth;
+    $places: $places * 10;
+  }
+  $ans: $ans + $int;
+  @return $ans;
+}
+
+@function float-ceil($value: pi(), $prec: 2) {
+  @if type-of($value) != number {
+    @debug "float-ceil only accepts numbers.";
+    @return null;
+  }
+  @if ( type-of($prec) == number and unitless($prec) ) == false {
+    @debug "float-ceil $prec must be set with a unitless number values. Returning false.";
+    @return false;
+  }
+  @if is-int($value) {
+    @debug "float-ceil is pointless when called on an integer.";
+    @return $value;
+  }
+
+  $prec: floor(abs($prec));
+  $int: floor($value);
+  $dec: $value - $int;
+  
+  $working: $dec;
+  $fps: 0;  $sub: .1;
+  @for $spot from 1 through $prec + 1 {
+    $count: 0;
+    @while $working > 0 {
+      $working: $working - $sub;
+      $count: $count + 1;
+    }
+    @if $working < 0 {
+      $count: $count - 1;
+      $working: $working + $sub;
+    }
+
+    $count: floor($count);
+    $count: $count*$sub;
+
+    @if $spot == 1 { $fps: $count; }
+    @else { $fps: append($fps, $count); }
+
+    $sub: $sub / 10;
+  }
+
+  $ans: 0;
+  $places: 10;
+  @for $i from 1 through $prec + 1 {
+    $nth: nth($fps, $i);
+    $test: $nth * $places;
+    @if $i == $prec + 1 {
+      $nth: 10 / $places;
+    }
+    $ans: $ans + $nth;
+    $places: $places * 10;
+  }
+  $ans: $ans + $int;
+  @return $ans;
+}
+
+@function float-floor($value: pi(), $prec: 2) {
+  @if type-of($value) != number {
+    @debug "float-floor only accepts numbers.";
+    @return null;
+  }
+  @if ( type-of($prec) == number and unitless($prec) ) == false {
+    @debug "float-floor $prec must be set with a unitless number values. Returning false.";
+    @return false;
+  }
+  @if is-int($value) {
+    @debug "float-floor is pointless when called on an integer.";
+    @return $value;
+  }
+
+  $prec: floor(abs($prec));
+  $int: floor($value);
+  $dec: $value - $int;
+  
+  $working: $dec;
+  $fps: 0;  $sub: .1;
+  @for $spot from 1 through $prec + 1 {
+    $count: 0;
+    @while $working > 0 {
+      $working: $working - $sub;
+      $count: $count + 1;
+    }
+    @if $working < 0 {
+      $count: $count - 1;
+      $working: $working + $sub;
+    }
+
+    $count: floor($count);
+    $count: $count*$sub;
+
+    @if $spot == 1 { $fps: $count; }
+    @else { $fps: append($fps, $count); }
+
+    $sub: $sub / 10;
+  }
+
+  $ans: 0;
+  $places: 10;
+  @for $i from 1 through $prec + 1 {
+    $nth: nth($fps, $i);
+    $test: $nth * $places;
+    @if $i == $prec + 1 {
+      $nth: 0;
+    }
+    $ans: $ans + $nth;
+    $places: $places * 10;
   }
   $ans: $ans + $int;
   @return $ans;
@@ -241,12 +358,12 @@
 // approximate equality makes up for SASS rounding errors
 
 @function aprox-equal($value1, $value2, $prec: .00002) {
-  @if ( type-of($value1) == number and unitless($value1) ) == false {
-    @debug "aprox-equal only accepts unitless number values for the comparison. Returning false.";
+  @if type-of($value1) != number {
+    @debug "aprox-equal only accepts number values for the comparison. Returning false.";
     @return false;
   }
-  @if ( type-of($value2) == number and unitless($value2) ) == false {
-    @debug "aprox-equal only accepts unitless number values for the comparison. Returning false.";
+  @if type-of($value2) != number {
+    @debug "aprox-equal only accepts number values for the comparison. Returning false.";
     @return false;
   }
   @if ( type-of($prec) == number and unitless($prec) ) == false {
@@ -272,17 +389,8 @@
 
 // nth-roots are calculated using Newton's Method
 @function nth-root($value,$n,$recursing: false) {
-  @if $value == 0 { @return 0; }
-  @if $value < 0 and $recursing == false {
-    @debug "nth-root(#{$value},#{$n}) results in a complex number. Returning null.";
-    @return null;
-  }
-  @if $n < -1 and $recursing == false { @return exponent($value, 1, $n); }
-  @if $n == -1 { @return 1 / $value; }
-  @if $n == 0 { @return 1; }
-
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "nth-root only accepts unitless number values for the base. Returning null.";
+  @if type-of($value) != number {
+    @debug "nth-root only accepts number values for the base. Returning null.";
     @return null;
   }
   @if ( is-int($n) and unitless($n) ) == false {
@@ -294,6 +402,20 @@
     @return null;
   }
 
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
+  @if $value == 0 { @return 0; }
+  @if $value < 0 and $recursing == false {
+    @debug "nth-root(#{$value},#{$n}) results in a complex number. Returning null.";
+    @return null;
+  }
+  @if $n < -1 and $recursing == false { @return exponent($value, 1, $n) * $units; }
+  @if $n == -1 { @return ( 1 / $value ) * $units; }
+  @if $n == 0 { @return 1 * $units; }
+
   $value: abs($value);
   $result: $value;
   $test: exponent($result, $n);
@@ -301,8 +423,8 @@
     $result: (1 / $n) * ( ( ($n - 1) * $result) + ($value / exponent($result,$n - 1)) );
     $test: exponent($result, $n);
   }
-  @if ($n < 0) { $result: 1 / $result; }
-  @return $result;
+  @if ($n < 0) { $result: 1 / $result }
+  @return $result * $units;
 }
 
 @function sqrt($value) {
@@ -323,19 +445,8 @@
 // exponent accepts integer numerators and denominators only
 // use power or pow for decimal exponent calculations
 @function exponent($value,$expN,$expD: 1) {
-  @if $expD == 0 {
-    @debug "exponent(#{$value},#{$expN}, #{$expD}) results in a complex number. You can't divide by zero. Returning Null.";
-    @return null;
-  }
-  @if $expN == 0 { @return 1; }
-  @if $value == 0 { @return 0; }
-  @if $value < 0 and is-int($expN / $expD) == false {
-    @debug "exponent(#{$value},#{$expN}, #{$expD}) results in a complex number. Returning Null.";
-    @return null;
-  }
-
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "exponent only accepts unitless number values for the base. Returning null.";
+  @if type-of($value) != number {
+    @debug "exponent only accepts number values for the base. Returning null.";
     @return null;
   }
   @if ( is-int($expN) and unitless($expN) ) == false {
@@ -347,8 +458,25 @@
     @return null;
   }
 
-  @if $expN == $expD { @return $value; }
-  @if opp($expN) == $expD { @return 1 / $value; }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
+
+  @if $expD == 0 {
+    @debug "exponent(#{$value},#{$expN}, #{$expD}) results in a complex number. You can't divide by zero. Returning Null.";
+    @return null;
+  }
+  @if $expN == 0 { @return 1 * $units; }
+  @if $value == 0 { @return 0; }
+  @if $value < 0 and is-int($expN / $expD) == false {
+    @debug "exponent(#{$value},#{$expN}, #{$expD}) results in a complex number. Returning Null.";
+    @return null;
+  }
+
+  @if $expN == $expD { @return $value * $units; }
+  @if opp($expN) == $expD { @return ( 1 / $value )  * $units; }
 
   $result: $value;
   $neg: ($expN < 0);
@@ -367,8 +495,8 @@
     $result: nth-root($result,$expD, true);
   }
 
-  @if $neg { @return 1 / $result; }
-  @else { @return $result; }
+  @if $neg { @return ( 1 / $result ) * $units; }
+  @else { @return $result * $units; }
 }
 
 @function square($value) {
@@ -407,14 +535,20 @@
 //////////////////////////////////////////////////
 
 @function factorial($value) {
-  @if ( is-int($value) and unitless($value) ) == false {
+  @if is-int($value) == false {
     @debug "factorial only accepts unitless integer values for the base. Returning null.";
     @return null;
   }
-  $result: 1;
+  $start: 1;
+  @if unitless($value) != true {
+    $start: $value / remove-unit($value);
+  }
+  $result: $start;
   @if $value > 1 {
-    @for $i from 1 through $value {
-      $result: $result * $i;
+    $i: $start;
+    @while $i <= $value {
+      $result: $result * remove-unit($i);
+      $i: $i + 1;
     }
   }
   @return $result;
@@ -429,7 +563,12 @@
 
 // logarithms (log)
 @function log($value, $prec: 5) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
+  @if type-of($value) != number {
     @debug "log only accepts unitless number values. Returning null.";
     @return null;
   }
@@ -441,12 +580,17 @@
     @debug "ln(#{$value}) is not within the set of real numbers.";
     @return null;
   }
-  @return ln($value, $prec)/ln(10, $prec);
+  @return ( ln($value, $prec) / ln(10, $prec) ) * $units;
 }
 
 // natural logarithms (ln)
 @function ln($value, $prec: 5) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
+  @if type-of($value) != number {
     @debug "ln only accepts unitless number values. Returning null.";
     @return null;
   }
@@ -469,9 +613,9 @@
     $result: $result + ( exponent(-1, $i) * exponent(-1 * (1 - $working), $i ) ) / $i;
   }
   @if $inverse {
-    @return $result;
+    @return $result * $units;
   } @else {
-    @return $result * -1;
+    @return ( $result * -1 ) * $units;
   }
 }
 
@@ -580,50 +724,65 @@
 //////////////////////////////////////////////////
 
 @function sin($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "sin only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "sin only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "sin only accepts units of deg or rad, deg assumed by default Returning null.";
     @return null;
   }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
   @if $unit == "deg" { $value: deg-to-rad($value); }
   @if $value % .5 == 0 {
     @if $value % 1 == 0 { @return 0; }
-    @else if $value % 1.5 == 0 { @return -1 }
-    @else { @return 1; }
+    @else if $value % 1.5 == 0 { @return -1 * $units }
+    @else { @return 1 * $units; }
   } 
   @return maclaurin($value, $value, 3);
 }
 
 @function cos($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "cos only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "cos only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "cos only accepts units of deg or rad, deg assumed by default Returning null.";
     @return null;
   }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
+  }
   @if $unit == "deg" { $value: deg-to-rad($value); }
-  @if $value == 0 { @return 1; }
+  @if $value == 0 { @return 1 * $units; }
   @if $value % .5 == 0 {
-    @if $value % 1 == 0 { @return -1; }
-    @else if $value % 2 == 0 { @return 1; }
+    @if $value % 1 == 0 { @return -1 * $units; }
+    @else if $value % 2 == 0 { @return 1 * $units; }
     @else { @return 0; }
   } 
   @return maclaurin($value, 1, 2);
 }
 
 @function tan($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "tan only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "tan only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "tan only accepts units of deg or rad, deg assumed by default Returning null.";
     @return null;
+  }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
   }
   @if $value == 0 { @return 0; }
   @if $unit == "deg" {
@@ -644,18 +803,23 @@
       }
     }
   }
-  @return sin($value, $unit) / cos($value, $unit);
+  @return ( sin($value, $unit) / cos($value, $unit) ) * $units;
 }
 
 
 @function csc($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "csc only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "csc only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "csc only accepts units of deg or rad, deg assumed by default Returning null.";
     @return null;
+  }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
   }
   @if $value == 0 {
     @debug "csc(0) returns a domain error. Returning null.";
@@ -678,17 +842,22 @@
     @debug "csc(#{$value}) returns a domain error. Returning null.";
     @return null;
   }
-  @return ( 1 / $result );
+  @return ( 1 / $result ) * $units;
 }
 
 @function sec($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "sec only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "sec only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "sec only accepts units of deg or rad, deg assumed by default Returning null.";
     @return null;
+  }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
   }
   @if $value == 0 { @return 1; }
   @if $unit == "deg" {
@@ -708,17 +877,22 @@
     @debug "sec(#{$value}) returns a domain error. Returning null.";
     @return null;
   }
-  @return ( 1 / $result );
+  @return ( 1 / $result ) * $units;
 }
 
 @function cot($value, $unit: "deg") {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "cot only accepts unitless number values. Returning null.";
+  @if type-of($value) != number {
+    @debug "cot only accepts number values. Returning null.";
     @return null;
   }
   @if type-of($unit) != string {
     @debug "cot only accepts units of deg or rad, deg assumed by default. Returning null.";
     @return null;
+  }
+  $units: 1;
+  @if unitless($value) == false {
+    $units: $value / remove-unit($value);
+    $value: remove-unit($value);
   }
   @if $value == 0 {
     @debug "cot(0) returns a domain error. Returning 0 instead.";
@@ -741,7 +915,7 @@
     @debug "cot(#{$value}) returns a domain error. Returning null.";
     @return null;
   }
-  @return ( 1 / $result );
+  @return ( 1 / $result ) * $units;
 }
 
 // Hyperbolic Functions
@@ -796,9 +970,8 @@
 
 // find length of a hypotenuse
 @function hypotenuse($value1, $value2) {
-  @if ( ( type-of($value1) == number and unitless($value1) ) == false )
-   or ( ( type-of($value2) == number and unitless($value2) ) == false ) {
-    @debug "cot only accepts unitless number values. Returning null.";
+  @if type-of($value1) != number or type-of($value2) != number {
+    @debug "cot only accepts number values. Returning null.";
     @return null;
   }
   @return sqrt( square($value1) + square($value2) );
@@ -818,14 +991,13 @@
     @debug "fibinocci only accepts unitless integer values for the max position. Returning null.";
     @return null;
   }
-  @if ( ( type-of($start) == list and unitless($max) ) == false )
-   or ( length($start) != 3 ) {
-    @debug "fibinocci only accepts unitless list of 3 numbers for a starting point. Returning null.";
+  @if type-of($start) != list or length($start) != 3 {
+    @debug "fibinocci only accepts list of 3 numbers for a starting point. Returning null.";
     @return null;
   }
   @for $i from 1 through 3 {
-    @if ( type-of(nth($start, $i)) == number and unitless(nth($start, $i)) ) == false {
-      @debug "fibinocci only accepts unitless number list for the max position. Returning null.";
+    @if type-of(nth($start, $i)) != number {
+      @debug "fibinocci only accepts number list for the max position. Returning null.";
       @return null;
     }
   }
