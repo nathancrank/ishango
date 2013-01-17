@@ -403,131 +403,131 @@
 
 
 
-sin {
-  @debug "sin deg test";
-  @for $i from -720 through 720 {
-    @debug "sin(#{$i/2},deg)";
-    sin-#{$i/2}: sin($i/2); 
-  }
-  @for $i from -360em through 360em {
-    @debug "sin(#{$i/2},deg)";
-    sin-#{$i/2}: sin($i/2); 
-  }
-  @debug "sin rad test";
-  @for $i from -20 through 20 {
-    @debug "sin(#{$i/10},rad)";
-    sin-#{$i/10}: sin($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "sin(#{$i/10},rad)";
-    sin-#{$i/10}: sin($i/10,rad); 
-  }
-}
+// sin {
+//   @debug "sin deg test";
+//   @for $i from -720 through 720 {
+//     @debug "sin(#{$i/2},deg)";
+//     sin-#{$i/2}: sin($i/2); 
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "sin(#{$i/2},deg)";
+//     sin-#{$i/2}: sin($i/2); 
+//   }
+//   @debug "sin rad test";
+//   @for $i from -20 through 20 {
+//     @debug "sin(#{$i/10},rad)";
+//     sin-#{$i/10}: sin($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "sin(#{$i/10},rad)";
+//     sin-#{$i/10}: sin($i/10,rad); 
+//   }
+// }
 
-cos {
-  @debug "cos deg test";
-  @for $i from -720 through 720 {
-    @debug "cos(#{$i/2},deg)";
-    cos-#{$i/2}: cos($i/2);
-  }
-  @for $i from -360em through 360em {
-    @debug "cos(#{$i/2},deg)";
-    cos-#{$i/2}: cos($i/2);
-  }
-  @debug "cos rad test";
-  @for $i from -20 through 20 {
-    @debug "cos(#{$i/10},rad)";
-    cos-#{$i/10}: cos($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "cos(#{$i/10},rad)";
-    cos-#{$i/10}: cos($i/10,rad); 
-  }
-}
+// cos {
+//   @debug "cos deg test";
+//   @for $i from -720 through 720 {
+//     @debug "cos(#{$i/2},deg)";
+//     cos-#{$i/2}: cos($i/2);
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "cos(#{$i/2},deg)";
+//     cos-#{$i/2}: cos($i/2);
+//   }
+//   @debug "cos rad test";
+//   @for $i from -20 through 20 {
+//     @debug "cos(#{$i/10},rad)";
+//     cos-#{$i/10}: cos($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "cos(#{$i/10},rad)";
+//     cos-#{$i/10}: cos($i/10,rad); 
+//   }
+// }
 
-tan {
-  @debug "tan deg test";
-  @for $i from -720 through 720 {
-    @debug "tan(#{$i/2},deg)";
-    tan-#{$i/2}: tan($i/2);
-  }
-  @for $i from -360em through 360em {
-    @debug "tan(#{$i/2},deg)";
-    tan-#{$i/2}: tan($i/2);
-  }
-  @debug "tan rad test";
-  @for $i from -20 through 20 {
-    @debug "tan(#{$i/10},rad)";
-    tan-#{$i/10}: tan($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "tan(#{$i/10},rad)";
-    tan-#{$i/10}: tan($i/10,rad); 
-  }
-}
+// tan {
+//   @debug "tan deg test";
+//   @for $i from -720 through 720 {
+//     @debug "tan(#{$i/2},deg)";
+//     tan-#{$i/2}: tan($i/2);
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "tan(#{$i/2},deg)";
+//     tan-#{$i/2}: tan($i/2);
+//   }
+//   @debug "tan rad test";
+//   @for $i from -20 through 20 {
+//     @debug "tan(#{$i/10},rad)";
+//     tan-#{$i/10}: tan($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "tan(#{$i/10},rad)";
+//     tan-#{$i/10}: tan($i/10,rad); 
+//   }
+// }
 
-csc {
-  @debug "csc deg test";
-  @for $i from -720 through 720 {
-    @debug "csc(#{$i/2},deg)";
-    csc-#{$i/2}: csc($i/2);
-  }
-  @for $i from -360em through 360em {
-    @debug "csc(#{$i/2},deg)";
-    csc-#{$i/2}: csc($i/2);
-  }
-  @debug "csc rad test";
-  @for $i from -20 through 20 {
-    @debug "csc(#{$i/10},rad)";
-    csc-#{$i/10}: csc($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "csc(#{$i/10},rad)";
-    csc-#{$i/10}: csc($i/10,rad); 
-  }
-}
+// csc {
+//   @debug "csc deg test";
+//   @for $i from -720 through 720 {
+//     @debug "csc(#{$i/2},deg)";
+//     csc-#{$i/2}: csc($i/2);
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "csc(#{$i/2},deg)";
+//     csc-#{$i/2}: csc($i/2);
+//   }
+//   @debug "csc rad test";
+//   @for $i from -20 through 20 {
+//     @debug "csc(#{$i/10},rad)";
+//     csc-#{$i/10}: csc($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "csc(#{$i/10},rad)";
+//     csc-#{$i/10}: csc($i/10,rad); 
+//   }
+// }
 
-sec {
-  @debug "sec deg test";
-  @for $i from -720 through 720 {
-    @debug "sec(#{$i/2},deg)";
-    sec-#{$i/2}: sec($i/2);
-  }
-  @for $i from -360em through 360em {
-    @debug "sec(#{$i/2},deg)";
-    sec-#{$i/2}: sec($i/2);
-  }
-  @debug "sec rad test";
-  @for $i from -20 through 20 {
-    @debug "sec(#{$i/10},rad)";
-    sec-#{$i/10}: sec($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "sec(#{$i/10},rad)";
-    sec-#{$i/10}: sec($i/10,rad); 
-  }
-}
+// sec {
+//   @debug "sec deg test";
+//   @for $i from -720 through 720 {
+//     @debug "sec(#{$i/2},deg)";
+//     sec-#{$i/2}: sec($i/2);
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "sec(#{$i/2},deg)";
+//     sec-#{$i/2}: sec($i/2);
+//   }
+//   @debug "sec rad test";
+//   @for $i from -20 through 20 {
+//     @debug "sec(#{$i/10},rad)";
+//     sec-#{$i/10}: sec($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "sec(#{$i/10},rad)";
+//     sec-#{$i/10}: sec($i/10,rad); 
+//   }
+// }
 
-cot {
-  @debug "cot deg test";
-  @for $i from -720 through 720 {
-    @debug "cot(#{$i/2},deg)";
-    cot-#{$i/2}: cot($i/2);
-  }
-  @for $i from -360em through 360em {
-    @debug "cot(#{$i/2},deg)";
-    cot-#{$i/2}: cot($i/2);
-  }
-  @debug "cot rad test";
-  @for $i from -20 through 20 {
-    @debug "cot(#{$i/10},rad)";
-    cot-#{$i/10}: cot($i/10,rad); 
-  }
-  @for $i from -10em through 10em {
-    @debug "cot(#{$i/10},rad)";
-    cot-#{$i/10}: cot($i/10,rad); 
-  }
-}
+// cot {
+//   @debug "cot deg test";
+//   @for $i from -720 through 720 {
+//     @debug "cot(#{$i/2},deg)";
+//     cot-#{$i/2}: cot($i/2);
+//   }
+//   @for $i from -360em through 360em {
+//     @debug "cot(#{$i/2},deg)";
+//     cot-#{$i/2}: cot($i/2);
+//   }
+//   @debug "cot rad test";
+//   @for $i from -20 through 20 {
+//     @debug "cot(#{$i/10},rad)";
+//     cot-#{$i/10}: cot($i/10,rad); 
+//   }
+//   @for $i from -10em through 10em {
+//     @debug "cot(#{$i/10},rad)";
+//     cot-#{$i/10}: cot($i/10,rad); 
+//   }
+// }
 
 // sinh {
 //   @debug "sinh test";
