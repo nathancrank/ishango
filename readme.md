@@ -5,7 +5,7 @@ http://nathancrank.com/
 
 
 ## What is it?
-Ishango.scss is a math framework for SASS. The initial goal of the project was to duplicate what Scott Kellum had done with his excellent Compass extension [Sassy-Math](https://github.com/scottkellum/Sassy-math), but without doing anything in Ruby. If that sounds hard, you're right, it was. SASS has clear limits in dealing with large numbers due to how it stores values in Ruby(see nex3's comment on [this GitHub issue thread](https://github.com/nex3/sass/issues/627) to better understand). Not all functions are working 100% perfectly yet, but this represents a fairly large chunk of what is present in Sassy-math and then a few new goodies.
+Ishango.scss is a math framework for SASS. The initial goal of the project was to duplicate what Scott Kellum had done with his excellent Compass extension [Sassy-Math](https://github.com/scottkellum/Sassy-math), but without doing anything in Ruby. If that sounds hard, you're right, it was. SASS has clear limits in dealing with large numbers due to how it stores values in Ruby (see nex3's comment on [this GitHub issue thread](https://github.com/nex3/sass/issues/627) to better understand). As a result, there will be rounding errors, but nothing major (don't try log(8000000000)).
 
 All of the functions provided are written in pure scss. That means that you can add it to any SASS project, with or without [Compass](http://compass-style.org), or alongside [Bourbon](http://bourbon.io).
 
@@ -32,6 +32,8 @@ Ishango includes the following functions:
 - ``float-floor($value, $prec)`` - round up a floating point value at a particular decimal place $prec
 - ``remove-unit($value)`` - remove units from $value (1px returns 1, 2em returns 2, etc…)
 - ``bool-flip($value)`` - returns true if $value is false, returns false if $value is true
+### list manipulation
+- ``mod-nth($list, $n, $new, $separator[optional]) - replace the $n position value in list with $new (ex. mod-nth("a b c", 2, x) == "a x c"). This allows you to use lists as full array replacements in SASS.
 ### approximate equality
 - ``aprox-equal($value1, $value2, $prec[optional])`` - similar to using ==, verifies that both values are within accepted tolerance $prec (this is to make up for rounding errors in SASS's handling of large floating point numbers)
 - ``not-aprox-equal($value1, $value2, $prec[optional])`` - verifies both values are not within accepted tolerance $prec

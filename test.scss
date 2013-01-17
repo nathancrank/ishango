@@ -203,6 +203,20 @@
 
 
 
+mod-nth {
+  $list: a b c d e f g h i j k l m n o p q r s t u v w x y z;
+  @for $i from 1 through 26 {
+    mod-nth-#{$i}: mod-nth($list, $i, x);
+  }
+  $list: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
+  @for $i from 1 through 26 {
+    mod-nth-#{$i}: mod-nth($list, $i, x, comma);
+  }
+}
+
+
+
+
 // aprox-equal {
 //   @debug "aprox-equal test";
 //   /* true */

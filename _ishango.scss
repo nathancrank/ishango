@@ -352,6 +352,49 @@
 }
 
 
+
+
+//////////////////////////////////////////////////
+// list manipulation
+//////////////////////////////////////////////////
+
+@function mod-nth($list, $n, $new, $separator: auto) {
+  @if type-of($list) != list {
+    @debug "mod-nth can only be called on a list value. Returning null.";
+    @return null;
+  }
+  @if ( is-int($n) and unitless($n) == true ) == false {
+    @debug "mod-nth only accepts unitless integers for $n. Returning null.";
+    @return null;
+  }
+  @if $separator != auto and $separator != comma and $separator != space {
+    @debug "mod-nth only accepts comma, space or auto for $separator. Returning null.";
+    @return null;
+  }
+  @if length($list) < $n or $n < 0 {
+    @debug "no position $n in list #{$list}. Returning original list.";
+    @return $list;
+  }
+  $i: 1;
+  $return: "";
+  @each $item in $list {
+    @if $i == 1 and $n != 1 {
+      $return: nth($list, 1);
+    } @else if $i == 1 and $n == 1 {
+      $return: $new;
+    } @else if $i == $n and $i != 1 {
+      $return: append($return, $new, $separator);
+    } @else {
+      $return: append($return, nth($list, $i), $separator);
+    }
+    $i: $i + 1;
+  }
+  @return $return;
+}
+
+
+
+
 //////////////////////////////////////////////////
 // approximate equality
 //////////////////////////////////////////////////
