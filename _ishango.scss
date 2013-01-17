@@ -1,16 +1,7 @@
 // Ishango v0.1
-// Math functions for your SASS projects.
+// Advanced Math in SASS
 // Nathan Crank
 // http://nathancrank.com/
-
-
-
-
-//////////////////////////////////////////////////
-// TODO
-//////////////////////////////////////////////////
-
-// - a method to treat list more like arrays
 
 
 
@@ -343,14 +334,6 @@
   @else { @return true; }
 }
 
-@function random() {
-  @return 4; // just a joke till I figure this out
-}
-
-@function rand() {
-  @return random();
-}
-
 
 
 
@@ -558,25 +541,6 @@
   @return exponent($value, 3);
 }
 
-// Power calculates exponents for floating point values
-@function power($value, $exp) {
-  @if $value == 0 { @return 0; }
-  @if $value == 1 { @return 1; }
-
-  @if $exp == 0 { @return 1; }
-  @if $exp == 1 { @return $value; }
-  @if $exp < 0 {
-    @debug "power(#{$value}, #{$exp}) results in a complex number. Returning Null.";
-    @return null;
-  }
-
-  @return exp($exp * log($value));
-}
-
-@function pow($value, $exp) {
-  @return power($value, $exp);
-}
-
 
 
 
@@ -729,49 +693,6 @@
     }
     $key: $key + 2;
   }
-  @return $result;
-}
-
-// exponential function
-// needs arg testing
-@function exp($value) {
-  @if $value < -5 {
-    @debug "exp(#{$value}) is a complex number. Returning Null.";
-    @return null;
-  }
-  @if $value == 0 { @return 1; }
-  $result: 1;
-  $numerator: 1;
-  $denominator: 1;
-  $n: 1;
-  $increment: 1;
-
-  // @for $n from 1 through $prec {
-    @while $increment > .00001 {
-    $presult: $result;
-    $numerator: $numerator * $value;
-    $denominator: $denominator * $n;
-    $increment: $numerator / $denominator;
-    $result: $result + $increment;
-    @debug $increment;
-    @debug $result;
-    // @debug $increment > 0;
-    // @debug $result == ( $result + $increment );
-    @if $result == 1/0 {
-      @debug "$presult";
-      @return $presult;
-    }
-    $n: $n + 1;
-    @if $presult == $result {
-      @debug "$result";
-      @return $result;
-    }
-    // @if $increment < .00001 {
-    //   @debug "$increment";
-    //   @return $result;
-    // }
-  }
-
   @return $result;
 }
 
@@ -1000,56 +921,6 @@
     @return null;
   }
   @return ( 1 / $result ) * $units;
-}
-
-// Hyperbolic Functions
-@function sinh($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "sinh only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return ( power( e(), 2 * $value) - 1 ) / ( 2 * power( e(), $value) );
-}
-
-@function cosh($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "cosh only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return ( power( e(), 2 * $value) + 1 ) / ( 2 * power( e(), $value) );
-}
-
-@function tanh($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "tanh only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return ( power( e(), 2 * $value) - 1 ) / ( 2 * power( e(), $value) + 1 );
-}
-
-
-@function csch($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "csch only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return 1 / sinh($value);
-}
-
-@function scsh($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "scsh only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return 1 / cosh($value);
-}
-
-@function coth($value) {
-  @if ( type-of($value) == number and unitless($value) ) == false {
-    @debug "coth only accepts unitless number values. Returning null.";
-    @return null;
-  }
-  @return 1 / tanh($value);
 }
 
 // find length of a hypotenuse

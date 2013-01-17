@@ -1,5 +1,5 @@
 # Ishango v0.1
-Math functions for your SASS projects.
+Advanced Math in SASS
 Nathan Crank
 http://nathancrank.com/
 
