@@ -11,11 +11,13 @@ All of the functions provided are written in pure scss. That means that you can 
 
 ## What can it do?
 Ishango includes the following functions:
+
 ### comparative
 - ``is-int($value)`` - test if value is an integer
 - ``is-float($value)`` - test if value is an floating point value (false is is-int($value) == true)
 - ``is-inf($value)`` - test if value is SASS's elusive "Infinity" value
 - ``is-prime($value)`` - test if value is a prime number
+
 ### constants
 - ``pi()`` or ``π()``
 - ``tau()`` or ``τ()``
@@ -23,6 +25,7 @@ Ishango includes the following functions:
 - ``e()`` - Euler Number
 - ``Infinity()`` or ``infinity()`` or ``inf()`` or ``∞()`` - SASS's elusive "Infinity" value
 - ``life-the-universe-and-everything()`` - returns 42 (It was late one night…)
+
 ### misc
 - ``opp($value)`` - returns -1 * $value;
 - ``abs-opp($value)`` - returns -1 * |$value|
@@ -32,29 +35,38 @@ Ishango includes the following functions:
 - ``float-floor($value, $prec)`` - round up a floating point value at a particular decimal place $prec
 - ``remove-unit($value)`` - remove units from $value (1px returns 1, 2em returns 2, etc…)
 - ``bool-flip($value)`` - returns true if $value is false, returns false if $value is true
+
 ### list manipulation
 - ``mod-nth($list, $n, $new, $separator[optional])`` - replace the $n position value in list with $new (ex. mod-nth("a b c", 2, x) == "a x c"). This allows you to use lists as full array replacements in SASS.
+
 ### approximate equality
 - ``aprox-equal($value1, $value2, $prec[optional])`` - similar to using ==, verifies that both values are within accepted tolerance $prec (this is to make up for rounding errors in SASS's handling of large floating point numbers)
 - ``not-aprox-equal($value1, $value2, $prec[optional])`` - verifies both values are not within accepted tolerance $prec
+
 ### nth-roots
 - ``nth-root($value, $n)`` - returns $n root of $value
 - ``sqrt($value)`` - returns square root of $value
 - ``cubert($value)`` - returns cubic root of $value
+
 ### exponents
 - ``exponent($value, $numerator, $denominator: 1)`` - returns the exponent for $value ^ ( $numerator / $denominator ). Only accepts integer values for $numerator and $denominator.
 - ``square($value)`` - squares $value
 - ``cube($value)`` - cubes $value
+
 ### factorial
 - ``factorial($value)`` - returns $value! (5! == 120, 8! == 40320)
+
 ### logarithms
 - ``log($value)`` - returns log10 of $value
 - ``ln($value)`` - returns natural log of $value
+
 ### degree/radian conversions
 - ``deg-to-rad($value)`` - convert degrees to radians ($value * π / 180)
 - ``rad-to-deg($value)`` - convert radians to degrees ($value * 180 / π)
+
 ### taylor series
 - ``maclaurin($value, $start, $key)`` - start a maclaurin series (this is here for sin and cos calculations, it is not intended to be used elsewise)
+
 ### trigonometry
 - ``sin($value, $unit: deg)`` - returns sin of $value, $unit can be set as "deg" or "rad"
 - ``cos($value, $unit: deg)`` - returns cos of $value, $unit can be set as "deg" or "rad"
@@ -62,6 +74,7 @@ Ishango includes the following functions:
 - ``csc($value, $unit: deg)`` - returns csc of $value, $unit can be set as "deg" or "rad"
 - ``sec($value, $unit: deg)`` - returns sec of $value, $unit can be set as "deg" or "rad"
 - ``cot($value, $unit: deg)`` - returns cot of $value, $unit can be set as "deg" or "rad"
+
 ### fibinocci sequence
 - ``fibinocci($max, $start: 0 1 1)`` - returns list of the fibinocci sequence starting from $start through $max number of positions
 - ``nth-fibinocci($n, $start)`` - returns the value of the number at position $n in a fibinocci sequence starting at $start
