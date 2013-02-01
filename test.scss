@@ -180,18 +180,25 @@
 //   float-floor-e: float-floor(3.141592em,5);
 // }
 
-// remove-unit {
-//   @debug "remove-unit test";
-//   percent: remove-unit(420%);
-//   em: remove-unit(420em);
-//   rem: remove-unit(420rem);
-//   px: remove-unit(420px);
-//   in: remove-unit(420in);
-//   cm: remove-unit(420cm);
-//   mm: remove-unit(420mm);
-//   ex: remove-unit(420ex);
-//   pt: remove-unit(420pt);
-//   pc: remove-unit(420pc);
+remove-unit {
+  @debug "remove-unit test";
+  percent: remove-unit(420%);
+  em: remove-unit(420em);
+  rem: remove-unit(420rem);
+  px: remove-unit(420px);
+  in: remove-unit(420in);
+  cm: remove-unit(420cm);
+  mm: remove-unit(420mm);
+  ex: remove-unit(420ex);
+  pt: remove-unit(420pt);
+  pc: remove-unit(420pc);
+}
+
+// int-length {
+//   @debug "int-length test";
+//   @for $i from 1 through 1001 {
+//     int-length-#{$i}: int-length($i);
+//   }
 // }
 
 // bool-flip {
@@ -570,18 +577,20 @@
 
 
 
-make-base-two {
-  @for $i from -256 through 256 {
-    make-base-two-#{$i}: make-base-two($i);
-  }
-}
+// make-base-two {
+//   @debug "make-base-two test";
+//   @for $i from -256 through 256 {
+//     make-base-two-#{$i}: make-base-two($i);
+//   }
+// }
 
-make-base-ten {
-  @for $i from -256 through 256 {
-    $test: make-base-two($i);
-    make-base-ten-#{$test}: make-base-ten($test);
-  }
-}
+// make-base-ten {
+//   @debug "make-base-ten test";
+//   @for $i from -256 through 256 {
+//     $test: make-base-two($i);
+//     make-base-ten-#{$test}: make-base-ten($test);
+//   }
+// }
 
 
 

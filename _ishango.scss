@@ -325,6 +325,22 @@
   @else if $units == "pc" { @return $value / 1pc; }
 }
 
+@function int-length($value) {
+  @if $value == 1 {
+    @return 1;
+  }
+  $test: abs($value);
+  $l: 0;
+  @while $test > 1 {
+    $l: $l + 1;
+    $test: $test / 10;
+  }
+  @if $value % exponent(10,$l) == 0 {
+    $l: $l + 1;
+  }
+  @return $l;
+}
+
 @function bool-flip($value) {
   @if $value != boolean {
     @debug "bool-flip() only accepts boolean values. Returning value unchanged.";
@@ -1049,16 +1065,8 @@
         }
       }
     }
-  } @else if is-int($value) and unitless($value) {
-    @if $value == 0 {
-      @return 0;
-    } @else if $value == 1 {
-      @return 1;
-    } @else {
-     
-    }
   } @else {
-    @debug "make base ten requires a list or integer value. Returning null.";
+    @debug "make-base-ten only accepts list representing binary numbers. Returning null.";
     @return null;
   }
   @return $result;
