@@ -375,6 +375,22 @@
   @return $return;
 }
 
+@function reverse-list($list) {
+  $result: 0;
+  $first: true;
+  $i: length($list);
+  @while $i > 0 {
+    @if $first {
+      $result: nth($list,$i);
+      $first: false;
+    } @else {
+      $result: append($result, nth($list,$i));
+    }
+    $i: $i - 1;
+  }
+  @return $result;
+}
+
 
 
 
@@ -975,6 +991,87 @@
   $fibinocci: fibinocci($n, $start);
   @return nth($fibinocci, $n);
 }
+
+
+
+
+//////////////////////////////////////////////////
+// binary math
+//////////////////////////////////////////////////
+// first value in any binary list indicates position from 0
+//   1 means negative
+//   0 means positive
+//   example: 0 1 0 = 2, 1 1 0 = -2
+
+// returns a list of 0 and 1 values to represent the binary number
+@function make-base-two($value) {
+  @if is-float($value) or unitless($value) == false {
+    @debug "make-base-two only accepts unitless integer values. Returning null.";
+    @return null;
+  }
+  $w: $value;
+  $result: 0;
+  $neg: false;
+  $first: true;
+  @if $value < 0 {
+    $neg: true;
+    $w: abs($w);
+  }
+  @while $w >= 1 {
+    $q: $w % 2;
+    $w: floor($w / 2);
+    @if $first {
+      $result: $q;
+      $first: false;
+    } @else {
+      $result: append($result, $q);
+    }
+  }
+  @if $neg {
+    $result: append($result, 1);
+  } @else {
+    $result: append($result, 0);
+  }
+  @return reverse-list($result);
+}
+
+@function make-base-ten($value) {
+  $result: 0;
+  @if type-of($value) == list {
+    $value: reverse-list($value);
+    $l: length($value);
+    @for $i from 1 through $l {
+      @if $i != $l {
+        $result: $result + nth($value, $i) * exponent(2,$i - 1);
+      } @else {
+        @if nth($value, $i) == 1 {
+          $result: -1 * $result;
+        }
+      }
+    }
+  } @else if is-int($value) and unitless($value) {
+    @if $value == 0 {
+      @return 0;
+    } @else if $value == 1 {
+      @return 1;
+    } @else {
+     
+    }
+  } @else {
+    @debug "make base ten requires a list or integer value. Returning null.";
+    @return null;
+  }
+  @return $result;
+}
+
+
+
+
+
+
+
+
+
 
 
 
