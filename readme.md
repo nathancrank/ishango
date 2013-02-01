@@ -113,6 +113,6 @@ Ishango is not a static project. There are still features missing that are neede
 Note that none of these future plans are concrete. I'd like to do all of these, but who knows which will happen and if they are all even possible in SASS. I hope they are.
 
 ## Comments and Contributions
-I welcome all the help I can get here. I am far from a Mathematician. I took Algebra I & II twice each, and certainly not because I was just so gosh-darn good at it. Before making this I was not entirely clear on what a logarithm was. Turns out it's useful in all sorts of ways :)
+I welcome all the help I can get here. I am far from a mathematician. I took Algebra I & II twice each, and certainly not because I was just so gosh-darn good at it. Before making this I was not entirely clear on what a logarithm was. Turns out it's useful in all sorts of ways :)
 
 If you find spots where my mathematical prowess has failed, please tell me in the GitHub issues section. If you wish to contribute code or refactored code, please do so via a pull request. Please make sure to update the test and readme as needed.
