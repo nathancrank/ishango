@@ -11,12 +11,8 @@
 //////////////////////////////////////////////////
 
 // check if value is an integer value
-@function is-int($value) {
-  @if type-of($value) == number {
-    @if floor(abs($value)) == abs($value) { @return true; }
-    @else { @return false; }
-  }
-  @else { @return false; }
+@function is-int($number) {
+  @return type-of($number) == number and floor(abs($number)) == abs($number);
 }
 
 // check if value is a floating point
