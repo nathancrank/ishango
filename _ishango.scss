@@ -29,12 +29,7 @@
 // uses Wilson's theorem
 @function is-prime($value) {
   $value: remove-unit($value);
-  @if is-int($value) and $value >= 2 {
-    @if factorial($value - 1) % $value == $value - 1 {
-      @return true;
-    }
-  }
-  @return false;
+  @return is-int($value) and $value >= 2 and factorial($value - 1) % $value == $value - 1;
 }
 
 
