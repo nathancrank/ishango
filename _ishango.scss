@@ -17,11 +17,7 @@
 
 // check if value is a floating point
 @function is-float($value) {
-  @if type-of($value) == number {
-    @if floor(abs($value)) == abs($value) { @return false; }
-    @else { @return true; }
-  }
-  @else { @return false; }
+  @return type-of($value) == number and floor(abs($value)) != abs($value);
 }
 
 // check if value is SASS's damned Infinity
