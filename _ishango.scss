@@ -22,11 +22,7 @@
 
 // check if value is SASS's damned Infinity
 @function is-inf($value) {
-  @if type-of($value) == number {
-    @if $value == inf() { @return true; }
-    @else { @return false; }
-  }
-  @else { @return false; }
+  @return type-of($value) == number and $value == inf();
 }
 
 // check if value is a prime number
