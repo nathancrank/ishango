@@ -11,42 +11,25 @@
 //////////////////////////////////////////////////
 
 // check if value is an integer value
-@function is-int($value) {
-  @if type-of($value) == number {
-    @if floor(abs($value)) == abs($value) { @return true; }
-    @else { @return false; }
-  }
-  @else { @return false; }
+@function is-int($number) {
+  @return type-of($number) == number and floor(abs($number)) == abs($number);
 }
 
 // check if value is a floating point
 @function is-float($value) {
-  @if type-of($value) == number {
-    @if floor(abs($value)) == abs($value) { @return false; }
-    @else { @return true; }
-  }
-  @else { @return false; }
+  @return type-of($value) == number and floor(abs($value)) != abs($value);
 }
 
 // check if value is SASS's damned Infinity
 @function is-inf($value) {
-  @if type-of($value) == number {
-    @if $value == inf() { @return true; }
-    @else { @return false; }
-  }
-  @else { @return false; }
+  @return type-of($value) == number and $value == inf();
 }
 
 // check if value is a prime number
 // uses Wilson's theorem
 @function is-prime($value) {
   $value: remove-unit($value);
-  @if is-int($value) and $value >= 2 {
-    @if factorial($value - 1) % $value == $value - 1 {
-      @return true;
-    }
-  }
-  @return false;
+  @return is-int($value) and $value >= 2 and factorial($value - 1) % $value == $value - 1;
 }
 
 
