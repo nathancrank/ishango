@@ -1,4 +1,4 @@
-# Ishango v0.1
+# Ishango v0.1.1
 Advanced Math in SASS
 Nathan Crank
 http://nathancrank.com/
@@ -8,6 +8,13 @@ http://nathancrank.com/
 Ishango.scss is a math framework for SASS. The initial goal of the project was to duplicate what Scott Kellum had done with his excellent Compass extension [Sassy-Math](https://github.com/scottkellum/Sassy-math), but without doing anything in Ruby. If that sounds hard, you're right, it was. SASS has clear limits in dealing with large numbers due to how it stores values in Ruby (see nex3's comment on [this GitHub issue thread](https://github.com/nex3/sass/issues/627) to better understand). As a result, there will be rounding errors, but nothing major (don't try log(8000000000)).
 
 All of the functions provided are written in pure scss. That means that you can add it to any SASS project, with or without [Compass](http://compass-style.org), or alongside [Bourbon](http://bourbon.io).
+
+## Changes: 
+v0.1.1
+- Improvements to is-int(), is-float(), is-inf(),and is-prime() by  thejameskyle.
+
+v0.1
+- Hello World!
 
 ## What can it do?
 Ishango includes the following functions:
@@ -115,4 +122,4 @@ Note that none of these future plans are concrete. I'd like to do all of these, 
 ## Comments and Contributions
 I welcome all the help I can get here. I am far from a mathematician. I took Algebra I & II twice each, and certainly not because I was just so gosh-darn good at it. Before making this I was not entirely clear on what a logarithm was. Turns out it's useful in all sorts of ways :)
 
-If you find spots where my mathematical prowess has failed, please tell me in the GitHub issues section. If you wish to contribute code or refactored code, please do so via a pull request. Please make sure to update the test and readme as needed.
+If you find spots where my mathematical prowess has failed, please tell me in the GitHub issues section. If you wish to contribute or refactor code, please do so via a pull request. Please make sure to update the test and readme as needed.
